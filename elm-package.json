@@ -7,7 +7,7 @@
         ".",
         "./src/elm"
     ],
-    "exposed-modules": ["Bowling"],
+    "exposed-modules": ["Bowling", "Marshalling"],
     "dependencies": {
         "elm-lang/core": "3.0.0 <= v < 4.0.0",
         "deadfoxygrandpa/elm-test": "3.0.0 <= v < 3.1.0",

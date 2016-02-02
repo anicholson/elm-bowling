@@ -4,7 +4,9 @@ import Task
 import Console
 import ElmTest exposing (..)
 
-import Bowling exposing(Frame(Empty, IncompleteFrame, Complete, Spare, Strike), gameScore)
+import Bowling exposing(Frame(Empty, IncompleteFrame, Complete, Spare, Strike), gameScore, Scorecard)
+import Marshalling
+import Json.Encode exposing (list, object, string)
 
 frameScoreTests : Test
 frameScoreTests =
@@ -43,10 +45,35 @@ gameScoreTests =
       , test "Turkey + gutters" (assertEqual 60 (gameScore [Strike, Strike, Strike, Empty, Empty]))
     ]
 
+newGame : Scorecard
+newGame = [  { player = "Fred", frames = [] } ]
+
+newGame' = Json.Encode.list <| [Json.Encode.object [("player", string "Fred"), ("frames", list [] )]]
+
+
+
+twoPlayers : Scorecard
+twoPlayers = [
+    { player = "Fred", frames = [] }
+  , { player = "Barney", frames = [ Strike, Strike, Strike, Strike ] } ]
+
+twoPlayers' = Json.Encode.list <| [
+    Json.Encode.object [("player", string "Fred"), ("frames", list [] )]
+  , Json.Encode.object [("player", string "Barney"), ("frames", list [] )] ]
+
+
+marshallingTests : Test
+marshallingTests =
+  suite "scorecardToJson"
+    [
+        test "new game with one player" (assertEqual newGame' <| Marshalling.scorecardToJson newGame)
+      , test "partially-complete game with two players" (assertEqual twoPlayers' <| Marshalling.scorecardToJson twoPlayers)
+    ]
+
 
 tests : Test
 tests =
-    suite "Bowling" [ frameScoreTests, gameScoreTests]
+    suite "Bowling" [ frameScoreTests, gameScoreTests, marshallingTests]
 
 
 port runner : Signal (Task.Task x ())

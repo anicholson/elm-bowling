@@ -1,7 +1,7 @@
-module Bowling (frameScore, gameScore, Frame(..), main) where
+module Bowling (frameScore, gameScore, Frame(..), Scorecard, Game) where
 
 {-| # A bowling game.
-@docs Frame, frameScore, gameScore, main
+@docs Frame, frameScore, gameScore, Scorecard, Game
 -}
 
 import Graphics.Element exposing (..)
@@ -16,12 +16,20 @@ type Frame =
 
 type alias Player = String
 
+{-| A game consists of a Player, and a List of Frames -}
+
 type alias Game = {
     player: Player
   , frames: List Frame
 }
 
-type alias Match = List Game
+{-| A list of Games.
+
+@docs Game
+
+-}
+
+type alias Scorecard = List Game
 
 firstScore : Frame -> Int
 firstScore frame =
@@ -83,7 +91,3 @@ gameScoreInternal accumulator previousFrames framesRemaining =
 {-| The score for a player, given a list of Frames -}
 gameScore : List Frame -> Int
 gameScore frames = gameScoreInternal 0 0 frames
-
-{-| Run the thing! -}
-main : Element
-main = show (gameScore [Strike, Strike, Strike, Strike, Strike, Strike, Strike, Strike, Strike, Strike, Strike, Strike])
