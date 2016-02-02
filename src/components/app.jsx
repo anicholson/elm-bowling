@@ -15,7 +15,6 @@ class App extends React.Component{
 
   static cardChanged(self) {
     return function(e) {
-      console.log(self);
       self.state.players = e;
 
       self.setState(self.state.players);

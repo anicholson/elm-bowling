@@ -13,7 +13,6 @@ const Scorecard = React.createClass({
   },
 
   render: function() {
-    console.info(this.props);
     return (
       <ul>{ this.props.players.map(this.eachPlayer) } </ul>
     )
