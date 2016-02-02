@@ -1,0 +1,31 @@
+{
+  "name": "elm-bowling",
+  "version": "1.0.0",
+  "description": "A bowling scorecard with the app model in Elm and the views in React.JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Elm"
+  ],
+  "author": "Andy Nicholson <andrew@anicholson.net>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "elm-webpack-loader": "^2.0.0",
+    "html-webpack-plugin": "^2.7.1",
+    "path": "^0.12.7",
+    "babel-polyfill": "^6.3.14",
+    "webpack": "^1.12.11"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.3.19",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
+  }
+}
