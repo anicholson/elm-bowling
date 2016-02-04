@@ -13,9 +13,8 @@ An Elm + React JS experiment.
 
 ## Usage
 
-1. `webpack -d -w`
-2. Run some kind of static file server out of `dist/`, for convenience, I often resort to `php -S 0.0.0.0:7000`
-3. Open http://localhost:7000/bowling.html
+1. `npm start`
+3. Open http://localhost:8080/
 
 ## Tests
 
