@@ -32,6 +32,7 @@ gameToJson game =
   object
     [ ("player", string game.player)
     , ("frames", list <| List.map frameToJson game.frames)
+    , ("score",  int <| gameScore game.frames)
     ]
 
 {-|
