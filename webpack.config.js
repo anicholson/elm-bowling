@@ -16,7 +16,7 @@ module.exports = {
       title: 'Elm\'s House of Bowling',
       template: 'index.html', // Load a custom template
       inject: 'body', // Inject all scripts into the body
-      filename: 'bowling.html',
+      filename: 'index.html',
       hash: true
     })
   ],
@@ -27,7 +27,8 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react']
-        }
+        },
+        exclude: [/node_modules/]
       },
       {
         test: /\.elm$/,
