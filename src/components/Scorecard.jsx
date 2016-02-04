@@ -5,16 +5,17 @@ const Scorecard = React.createClass({
 
   eachPlayer: function(player, $index) {
     return (
-        <li key={$index}>
-          <p>{player.player}</p>
-          <p>Frames placeholder</p>
-        </li>
+        <div key={$index}>
+          <p className="player__name">{player.player}</p>
+          <p className="player__frames">{JSON.stringify(player.frames, null, 2)}</p>
+          <p className="player__score">{player.score}</p>
+        </div>
     )
   },
 
   render: function() {
     return (
-      <ul>{ this.props.players.map(this.eachPlayer) } </ul>
+      <div className="player">{ this.props.players.map(this.eachPlayer) } </div>
     )
   }
 });
