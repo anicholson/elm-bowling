@@ -1,5 +1,6 @@
 const React = require('react'),
-    Scorecard = require('./Scorecard.jsx');
+    Scorecard = require('./Scorecard.jsx'),
+    styles = require('../styles/app.css');
 
 class App extends React.Component{
   constructor(args) {
@@ -23,7 +24,7 @@ class App extends React.Component{
 
   render() {
     return (
-        <div id="app">
+        <div id="app" className={styles.main}>
           <h1>Elm's House of Bowling</h1>
           <Scorecard players={this.state.players} />
         </div>
