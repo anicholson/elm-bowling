@@ -61,8 +61,8 @@ frameScore  frame next nextnext bonusFrame =
     Spare first -> 10 + firstScore next
     otherwise -> 0
 
-gameScoreInternal : Int -> Int -> List Frame -> Int
-gameScoreInternal accumulator previousFrames framesRemaining =
+gameScoreInternal : Int -> Int -> List Int -> List Frame -> List Int
+gameScoreInternal accumulator previousFrames cumulativeScores framesRemaining =
   let
    framesUnderConsideration = List.take 3 framesRemaining
    finalFrame = (previousFrames == 9)
@@ -77,7 +77,7 @@ gameScoreInternal accumulator previousFrames framesRemaining =
                                         Nothing -> []
   in
     case List.length framesUnderConsideration of
-    0 -> accumulator
+    0 -> cumulativeScores
     otherwise -> let
             frames'  = List.drop 1 framesUnderConsideration
             this     = extractFrame <| Just framesUnderConsideration
@@ -86,8 +86,11 @@ gameScoreInternal accumulator previousFrames framesRemaining =
 
             scoreForThisFrame = frameScore this next nextnext finalFrame
          in
-            gameScoreInternal (accumulator + scoreForThisFrame) nextFrame' <| ensuredFramesRemaining
+           let
+             runningScore = accumulator + scoreForThisFrame
+           in
+             gameScoreInternal runningScore nextFrame' (List.append cumulativeScores [runningScore]) <| ensuredFramesRemaining
 
 {-| The score for a player, given a list of Frames -}
-gameScore : List Frame -> Int
-gameScore frames = gameScoreInternal 0 0 frames
+gameScore : List Frame -> List Int
+gameScore frames = gameScoreInternal 0 0 [] frames

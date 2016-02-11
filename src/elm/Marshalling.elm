@@ -29,11 +29,21 @@ frameToJson frame =
 
 gameToJson : Game -> Value
 gameToJson game =
-  object
-    [ ("player", string game.player)
-    , ("frames", list <| List.map frameToJson game.frames)
-    , ("score",  int <| gameScore game.frames)
-    ]
+  let
+    frameScores = List.map int (gameScore game.frames)
+  in
+    let
+      finalScore = List.reverse frameScores |> List.head
+    in
+      case finalScore of
+        Just finalScore' ->
+          object
+            [ ("player", string game.player)
+            , ("frames", list <| List.map frameToJson game.frames)
+            , ("runningScores", list <| frameScores)
+            , ("score",  finalScore')
+            ]
+        otherwise -> Debug.crash "There really should be some scores here!"
 
 {-|
 
