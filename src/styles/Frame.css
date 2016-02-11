@@ -1,0 +1,34 @@
+.container {
+display: flex;
+  flex: 0 50px;
+}
+
+.individual_bowl_container {
+
+}
+
+.score {
+  float: left;
+}
+
+.strike {
+  composes: score;
+  font-weight: bolder;
+}
+
+.spare {
+  composes: score;
+  font-weight: bold;
+}
+
+.frameScore {
+  position: relative;
+  width: 100%;
+}
+
+.frameScore > p {
+  position: absolute;
+  margin: 0;
+  bottom: 5px;
+  right: 5px;
+}

@@ -1,5 +1,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: __dirname + '/src/',
@@ -9,7 +10,8 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    filename: '[name].js'
+    filename: '[name].js',
+    libraryTarget: 'umd'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -18,7 +20,8 @@ module.exports = {
       inject: 'body', // Inject all scripts into the body
       filename: 'index.html',
       hash: true
-    })
+    }),
+    new ExtractTextPlugin('style.css', { allChunks: true })
   ],
   module: {
     loaders: [
@@ -34,7 +37,15 @@ module.exports = {
         test: /\.elm$/,
         loader: 'elm-webpack',
         exclude: [/elm-stuff/, /node_modules/]
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
       }
     ]
-  }
+  },
+  postcss: [
+    require('autoprefixer-core'),
+    require('postcss-color-rebeccapurple')
+  ]
 };

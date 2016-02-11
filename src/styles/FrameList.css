@@ -1,0 +1,8 @@
+.frameRow {
+  display:inherit;
+  width: 100%;
+}
+
+.frame {
+  composes: frame-flex from "./common.css";
+}
